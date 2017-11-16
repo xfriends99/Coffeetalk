@@ -69,6 +69,7 @@ class NewsController extends Controller {
         if(Input::get('type')=='Evento'){
             $rules = array(
                 'title' => 'required|max:140',
+                'language'  => 'required',
                 'date'  => 'required',
                 'lugar'  => 'required',
             );
@@ -79,6 +80,7 @@ class NewsController extends Controller {
         } else {
             $rules = array(
                 'title' => 'required|max:140',
+                'language'  => 'required',
                 'volanta' => 'required',
                 'copete' => 'required',
             );
@@ -109,6 +111,7 @@ class NewsController extends Controller {
 
 		$news->title = Input::get('title');
         $news->users_id = \Auth::user()->id;
+        $news->language = Input::get('language');
 
         if(Input::get('type')=='Evento'){
             $news->date = Input::get('date');
@@ -140,6 +143,7 @@ class NewsController extends Controller {
         if(Input::get('type')=='Evento'){
             $rules = array(
                 'title' => 'required|max:140',
+                'language'  => 'required',
                 'date'  => 'required',
                 'lugar'  => 'required',
             );
@@ -150,6 +154,7 @@ class NewsController extends Controller {
         } else {
             $rules = array(
                 'title' => 'required|max:140',
+                'language'  => 'required',
                 'volanta' => 'required',
                 'copete' => 'required',
             );
@@ -170,6 +175,8 @@ class NewsController extends Controller {
 
         $news = \App\News::find($id);
         $news->type = Input::get('type');
+        $news->language = Input::get('language');
+
         if (Request::hasFile('small_pic')){
             $imageName = Request::file('small_pic')->getClientOriginalName();
             Request::file('small_pic')->move('publicaciones', $imageName);

@@ -26,10 +26,10 @@
 				<li><a href="/novedades">News</a></li>
 				<li><a href="/contacto">Contacto</a></li>
 				<li class="dropdown community-dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ES <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@if(Session::get('lang')) {{strtoupper(Session::get('lang'))}} @else ES @endif <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="/">Español</a></li>
-						<li><a href="/en">English</a></li>
+						<li><a href="/lang/es">Español</a></li>
+						<li><a href="/lang/en">English</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -52,10 +52,10 @@
 				<li><a href="/novedades">News</a></li>
 				<li><a href="/contacto">Contacto</a></li>
 				<li class="dropdown community-dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Español <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@if(Session::get('lang')) {{strtoupper(Session::get('lang'))}} @else ES @endif <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="/">Español</a></li>
-						<li><a href="/en">English</a></li>
+						<li><a href="/lang/es">Español</a></li>
+						<li><a href="/lang/en">English</a></li>
 					</ul>
 				</li>
 			</ul>

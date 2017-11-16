@@ -87,10 +87,13 @@
 								<img class="header__icon" src="assets/img/icons/ico-newsletter.png">
 							</div>
 							<div class="card__content">
-								<form action="mail/cv" method="post" class="newsletter-form" data-area="home">
+								<form action="mail/cv" method="post" enctype="multipart/form-data" class="newsletter-form" data-area="home">
 									{{csrf_field()}}
 									<div class="input__group mb1">
 										<input class="input__sm" type="text" placeholder="Nombre completo" name="nombre" required>
+									</div>
+									<div class="input__group mb1 white">
+										<input class="input__sm" type="file" placeholder="cv" name="cv" required>
 									</div>
 									<div class="input__group">
 										<input class="input__sm" type="email" placeholder="Email" name="email" required>

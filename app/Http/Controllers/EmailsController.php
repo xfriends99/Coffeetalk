@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use Illuminate\Http\Request;
 use Mail;
+use Request as RequestFile;
 
 class EmailsController extends Controller
 {
@@ -33,9 +34,14 @@ class EmailsController extends Controller
 
     public function cv(Request $request)
     {
-        Mail::send('mails.cv', $request->all(), function ($m){
+        if (RequestFile::hasFile('cv')){
+            $imageName = RequestFile::file('cv')->getClientOriginalName();
+            RequestFile::file('cv')->move('cv', $imageName);
+            $file = base_path('public/cv/'.$imageName);
+        }
+        Mail::send('mails.cv', $request->all(), function ($m) use ($file){
             $m->from('Coffeeta@clientship.com', 'Cv recibido');
-
+            $m->attach($file);
             $m->to(env('MAIL_COMPANY'), env('MAIL_COMPANY_NAME'))->subject('Cv recibido');
         });
         Session::flash('message', 'Cv enviado correctamente!!');

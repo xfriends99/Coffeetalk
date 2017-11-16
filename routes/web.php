@@ -56,3 +56,10 @@ Route::get('approveNew/{id}', 'NewsController@approveNew');
 Route::post('mail/contacto', 'EmailsController@contacto');
 Route::post('mail/cv', 'EmailsController@cv');
 Route::post('mail/news', 'EmailsController@news');
+
+Route::get('lang/{lang}', function ($lang) {
+        session(['lang' => $lang]);
+        return \Redirect::back();
+    })->where([
+    'lang' => 'en|es'
+]);

@@ -21,6 +21,7 @@
 								<th>Título</th>
 								<th>Autor</th>
 								<th>Tipo</th>
+								<th>Idioma</th>
 								<th>Validado?</th>
 								<th>Acción</th>
 							</tr>
@@ -32,6 +33,13 @@
 								<td>{{ $new->title }}</td>
 								<td>{{ $new->created_by->name . ' ' . $new->created_by->surname }}</td>
 								<td>{{$new->type}}</td>
+								<td>
+									@if($new->language=='es')
+										Español
+									@else
+										Ingles
+									@endif
+								</td>
 								<td>@if($new->is_approved==1) SI @else NO @endif</td>
 								<td><a href= "/news/{{$new->id}}" class="btn btn-info" >Editar</a>&nbsp;&nbsp;<a href= "/deleteNew/{{$new->id}}" onClick="return confirm('¿Esta seguro?');" class="btn btn-danger" >Eliminar</a> @if($new->is_approved!=1 && Auth::user()->roles_id==1)&nbsp;&nbsp;<a href= "/approveNew/{{$new->id}}" onClick="return confirm('¿Esta seguro?');" class="btn btn-warning" >Aprobar</a> @endif</td>
 							</tr>

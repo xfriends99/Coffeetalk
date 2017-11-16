@@ -34,13 +34,20 @@ class HomeController extends Controller
         return view('traduccion');
     }
 
-    public function novedades()
+    public function novedades(Request $request)
     {
+        $page = isset($request->page) ? $request->page : 1;
         $news = News::where('type', 'Noticia')
-            ->orderBy('created_at','desc')->get();
+            ->where('language', session('lang'))
+            ->orderBy('created_at','desc')
+            ->limit(5)->offset(($page-1)*5)->get();
+        $count = News::where('type', 'Noticia')
+            ->where('language', session('lang'))
+            ->orderBy('created_at','desc')->count();
         $eventos = News::where('type', 'Evento')
+            ->where('language', session('lang'))
             ->orderBy('id','desc')->get();
-        return view('novedades', compact('news', 'eventos'));
+        return view('novedades', compact('news', 'eventos', 'page', 'count'));
     }
 
     public function contacto()
@@ -53,11 +60,13 @@ class HomeController extends Controller
         try{
             $new = News::find($id);
             $new2 = News::where('created_at','<',$new->created_at)
+                ->where('language', session('lang'))
                 ->where('type','!=','Evento')->get()->first();
         } catch (\Exception $e){
             Redirect::back();
         }
         $eventos = News::where('type', 'Evento')
+            ->where('language', session('lang'))
             ->orderBy('id','desc')->get();
         return view('noticia', compact('new', 'eventos', 'new2'));
     }

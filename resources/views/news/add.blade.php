@@ -47,6 +47,23 @@
 									</div>
 								</div>
 
+								<div class="form-group{{ $errors->has('language') ? ' has-error' : '' }}">
+									<label for="roles_id" class="col-md-4 control-label">Idioma</label>
+
+									<div class="col-md-6">
+										<select id="type" class="form-control" name="language">
+											<option selected value="es">Español</option>
+											<option value="en">Ingles</option>
+										</select>
+
+										@if ($errors->has('language'))
+											<span class="help-block">
+											<strong>{{ $errors->first('language') }}</strong>
+										</span>
+										@endif
+									</div>
+								</div>
+
 								<div class="form-group">
 									<label class="col-md-4 control-label">Titulo</label>
 									<div class="col-md-6">
