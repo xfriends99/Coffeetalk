@@ -61,7 +61,8 @@ class HomeController extends Controller
             $new = News::find($id);
             $new2 = News::where('created_at','<',$new->created_at)
                 ->where('language', session('lang'))
-                ->where('type','!=','Evento')->get()->first();
+                ->where('type','!=','Evento')
+                ->orderBy('created_at', 'desc')->get()->first();
         } catch (\Exception $e){
             Redirect::back();
         }
